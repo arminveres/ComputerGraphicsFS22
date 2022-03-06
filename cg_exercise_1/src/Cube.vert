@@ -1,4 +1,5 @@
 #version 410 core
+// vim: ft=glsl
 
 // Input vertex data
 layout(location = 0) in vec3 vPosition;

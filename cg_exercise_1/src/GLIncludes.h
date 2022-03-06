@@ -5,4 +5,3 @@
 #include <GLFW/glfw3.h>
 
 #endif // GL_INCLUDES_H_INCLUDED
-
