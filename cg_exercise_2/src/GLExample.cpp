@@ -55,8 +55,9 @@ bool GLExample::init() {
   // Init models
   cube = std::make_shared<Cube>();
   bool constructed = cube->createVertexArray(0, 1, 2);
-  if (!constructed)
+  if (!constructed) {
     return constructed;
+  }
   cube->setShapePosition(glm::vec3(-2.0, 0.0, 0.0));
 
   // Init models
@@ -74,16 +75,16 @@ bool GLExample::render() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   /* TODO: Add here code for the following tasks:
-   *	- enable or disable face culling.
-   *	- change between front face and backface culling.
-   *	- change the ordering of vertices/indices in triangles to be considered
-   *for front face and backface culling.
-   *	- enable or disable wireframe mode
+   * - enable or disable face culling.
+   * - change between front face and backface culling.
+   * - change the ordering of vertices/indices in triangles to be considered for
+   *   front face and backface culling.
+   * - enable or disable wireframe mode
    *
    * All these things can be done with one line of code. The main task is to
-   *find the commands and apply the parameters. There are several ressource
-   *where you can find this information e.g. OpenGL reference, official OpenGL
-   *specification or a OpenGL cheatsheet
+   * find the commands and apply the parameters. There are several ressource
+   * where you can find this information e.g. OpenGL reference, official OpenGL
+   * specification or a OpenGL cheatsheet
    */
 
   //...
@@ -103,9 +104,15 @@ bool GLExample::render() {
   cube->draw();
 
   /* TODO: Add here code to call the draw method of the cuboid similar to the
-   * cube above */
+   * cube above
+   * HACK: still needs to be rewritten , now two cubes are present
+   */
 
-  /* END TODO */
+  mvpMatrix = viewProjectionMatrix * cuboid->getModelMatrix();
+  glUniformMatrix4fv(mvpUniformLocation, 1, GL_FALSE, &mvpMatrix[0][0]);
+  cuboid->draw();
+
+  /* END TODO: */
 
   return true;
 }
