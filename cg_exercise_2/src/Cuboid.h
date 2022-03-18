@@ -5,10 +5,13 @@
 
 namespace cgCourse {
 class Cuboid : public Shape {
-public:
+ public:
   Cuboid();
   void draw();
-};
-} // namespace cgCourse
 
-#endif //  CUBOID_H
+ private:
+  float func0(float x);
+};
+}  // namespace cgCourse
+
+#endif  //  CUBOID_H

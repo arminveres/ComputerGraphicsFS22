@@ -13,10 +13,10 @@ uniform mat4 mvpMatrix;
 
 void main()
 {
-	// Output position of the vertex, in clip space : MVP * vPosition
-	gl_Position = mvpMatrix * vec4(vPosition, 1);
-	// The color of each vertex will be interpolated
-	// to produce the color of each fragment
-	fragColor = vColor;
+  // Output position of the vertex, in clip space : MVP * vPosition
+  gl_Position = mvpMatrix * vec4(vPosition, 1);
+  // The color of each vertex will be interpolated
+  // to produce the color of each fragment
+  fragColor = vColor;
 }
 

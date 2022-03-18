@@ -12,10 +12,12 @@ find_package(glfw3 REQUIRED)
 set(GLFW_LIBRARIES glfw)
 set(GLM_LIBRARIES glm)
 
+# include external dir for glfw
+set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}/external")
+# include_directories(./external/)
 
 include_directories(SYSTEM ${GLEW_INCLUDE_DIRS})
 include_directories(SYSTEM ${GLFW_INCLUDE_DIRS})
-include_directories(./external/)
 
 add_compile_definitions(SHADER_DIR="${CMAKE_SOURCE_DIR}/src")
 

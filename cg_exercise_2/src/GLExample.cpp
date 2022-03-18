@@ -74,22 +74,23 @@ bool GLExample::render() {
   glClearColor(0.6f, 0.6f, 0.6f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+  // wireframe mode
+  // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+  // glEnable(GL_CULL_FACE);
+  // glCullFace(GL_FRONT);
+  // glCullFace(GL_BACK);
+
   /* TODO: Add here code for the following tasks:
-   * - enable or disable face culling.
-   * - change between front face and backface culling.
-   * - change the ordering of vertices/indices in triangles to be considered for
-   *   front face and backface culling.
-   * - enable or disable wireframe mode
+   * - DONE: enable or disable face culling. -> chapter 25
+   * - DONE: change between front face and backface culling.
+   * - TODO: change the ordering of vertices/indices in triangles to be considered for front face and backface culling.
+   * - DONE: enable or disable wireframe mode: chapter 5
    *
    * All these things can be done with one line of code. The main task is to
    * find the commands and apply the parameters. There are several ressource
    * where you can find this information e.g. OpenGL reference, official OpenGL
    * specification or a OpenGL cheatsheet
    */
-
-  //...
-
-  /* END TODO */
 
   // Load program
   glUseProgram(program);
