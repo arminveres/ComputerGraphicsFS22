@@ -86,7 +86,7 @@ bool GLExample::render() {
    * - TODO: change the ordering of vertices/indices in triangles to be considered for front face and backface culling.
    * - DONE: enable or disable wireframe mode: chapter 5
    *
-   * All these things can be done with one line of code. The main task is to
+   * EACH of these things can be done with one line of code. The main task is to
    * find the commands and apply the parameters. There are several ressource
    * where you can find this information e.g. OpenGL reference, official OpenGL
    * specification or a OpenGL cheatsheet
@@ -104,16 +104,13 @@ bool GLExample::render() {
   glUniformMatrix4fv(mvpUniformLocation, 1, GL_FALSE, &mvpMatrix[0][0]);
   cube->draw();
 
-  /* TODO: Add here code to call the draw method of the cuboid similar to the
+  /* DONE: Add here code to call the draw method of the cuboid similar to the
    * cube above
-   * HACK: still needs to be rewritten , now two cubes are present
    */
 
   mvpMatrix = viewProjectionMatrix * cuboid->getModelMatrix();
   glUniformMatrix4fv(mvpUniformLocation, 1, GL_FALSE, &mvpMatrix[0][0]);
   cuboid->draw();
-
-  /* END TODO: */
 
   return true;
 }
