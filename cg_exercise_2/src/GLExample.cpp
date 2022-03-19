@@ -63,7 +63,7 @@ bool GLExample::init() {
   // Init models
   cuboid = std::make_shared<Cuboid>();
   constructed = cuboid->createVertexArray(0, 1, 2);
-  cuboid->setShapePosition(glm::vec3(1.0, 0.0, 0.0));
+  cuboid->setShapePosition(glm::vec3(2.0, 0.0, 0.0));
   return constructed;
 }
 
@@ -74,8 +74,15 @@ bool GLExample::render() {
   glClearColor(0.6f, 0.6f, 0.6f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+  /* The default value is GL_CCW that stands for counter-clockwise ordering with
+   * the other option being GL_CW which (obviously) stands for clockwise ordering.
+   * being GL_CW which (obviously) stands for clockwise ordering.
+   */
+  // glFrontFace(GL_CW);
+  glFrontFace(GL_CCW);
+
   // wireframe mode
-  // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+  glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
   // glEnable(GL_CULL_FACE);
   // glCullFace(GL_FRONT);
   // glCullFace(GL_BACK);
@@ -83,7 +90,7 @@ bool GLExample::render() {
   /* TODO: Add here code for the following tasks:
    * - DONE: enable or disable face culling. -> chapter 25
    * - DONE: change between front face and backface culling.
-   * - TODO: change the ordering of vertices/indices in triangles to be considered for front face and backface culling.
+   * - DONE: change the ordering of vertices/indices in triangles to be considered for front face and backface culling.
    * - DONE: enable or disable wireframe mode: chapter 5
    *
    * EACH of these things can be done with one line of code. The main task is to
@@ -158,7 +165,7 @@ bool GLExample::checkLinkStatusOfProgram(GLuint _program) {
 glm::mat4 GLExample::computeViewProjectionMatrix() const {
   // Camera matrix
   glm::mat4 view = glm::lookAt(
-      glm::vec3(-1, 18, -18), // Camera is at (-1, 18, -18), in World Space
+      glm::vec3(-5, 10, -10), // Camera is at (-1, 18, -18), in World Space
       glm::vec3(0, 0, 0),     // and looks at the origin
       glm::vec3(0, 1, 0)      // Head is up (set to 0,-1,0 to look upside-down)
   );
