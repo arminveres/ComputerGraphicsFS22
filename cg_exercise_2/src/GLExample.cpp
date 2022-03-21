@@ -82,8 +82,9 @@ bool GLExample::render() {
   glFrontFace(GL_CCW);
 
   // wireframe mode
+  // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
   glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-  // glEnable(GL_CULL_FACE);
+  glEnable(GL_CULL_FACE);
   // glCullFace(GL_FRONT);
   // glCullFace(GL_BACK);
 
@@ -165,7 +166,7 @@ bool GLExample::checkLinkStatusOfProgram(GLuint _program) {
 glm::mat4 GLExample::computeViewProjectionMatrix() const {
   // Camera matrix
   glm::mat4 view = glm::lookAt(
-      glm::vec3(-5, 10, -10), // Camera is at (-1, 18, -18), in World Space
+      glm::vec3(-1, 10, -10), // Camera is at (-1, 18, -18), in World Space
       glm::vec3(0, 0, 0),     // and looks at the origin
       glm::vec3(0, 1, 0)      // Head is up (set to 0,-1,0 to look upside-down)
   );

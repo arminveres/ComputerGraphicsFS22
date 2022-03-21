@@ -23,31 +23,31 @@ Cuboid::Cuboid()
     : Shape() {
   float x_1, y_1;
   float x_2, y_2;
-  float x_3, y_3;
+  // float x_3, y_3;
 
   // variables that decide the shape and segmentation of the function
-  int number_of_elements = 15;
+  int number_of_elements = 40;
   float radius = 0.5f;
-  float shape_size = 4.0f;
+  const float interval_size = 4.0f;  // [-2,2] => 4
 
   glm::vec3 normal_z = glm::vec3(0.f, 0.f, 1.f) * radius;
 
-  for (int i = 0; i < number_of_elements; ++i) {
-    // defining the coordinates
-    x_1 = shape_size / number_of_elements * i - shape_size / 2.f;
-    x_2 = shape_size / number_of_elements * (i + 1) - shape_size / 2.f;
-    x_3 = shape_size / number_of_elements * (i + 2) - shape_size / 2.f;
+  for (int i = 0; i < number_of_elements - 2; ++i) {
+    // defining the coordinates and adjust x coordinates for interval
+    x_1 = interval_size / number_of_elements * i - interval_size / 2.f;
+    x_2 = interval_size / number_of_elements * (i + 1) - interval_size / 2.f;
+    // x_3 = interval_size / number_of_elements * (i + 2) - interval_size / 2.f;
     y_1 = func0(x_1);
     y_2 = func0(x_2);
-    y_3 = func0(x_3);
+    // y_3 = func0(x_3);
 
     // textual debugging
-    // std::cout << "i: " << i << "\n";
-    // std::cout << "x1: " << x_1 << "\n";
-    // std::cout << "x2: " << x_2 << "\n";
+    std::cout << "i: " << i << "\n";
+    std::cout << "x1: " << x_1 << " | ";
+    std::cout << "y1: " << y_1 << "\n";
+    std::cout << "x2: " << x_2 << " | ";
+    std::cout << "y2: " << y_2 << "\n";
     // std::cout << "x3: " << x_3 << "\n";
-    // std::cout << "y1: " << y_1 << "\n";
-    // std::cout << "y2: " << y_2 << "\n";
     // std::cout << "y3: " << y_3 << "\n";
 
     // vector definitions, in 2D
@@ -57,12 +57,28 @@ Cuboid::Cuboid()
     /* get perpendicular vectors with new length 1
      * (a, b, c) => (b, -a, c)
      */
-    glm::vec3 perpendicular_a_xy =
-        glm::normalize(glm::vec3(y_2 - y_1, -(x_2 - x_1), 0)) * radius;
-        // glm::normalize(glm::vec3(y_1, -(x_1), 0)) * radius;
-    glm::vec3 perpendicular_b_xy =
-        glm::normalize(glm::vec3(y_3 - y_2, -(x_3 - x_2), 0)) * radius;
-        // glm::normalize(glm::vec3(y_2, -(x_2), 0)) * radius;
+    glm::vec3 perpendicular_a_xy;
+    // glm::normalize(glm::vec3(y_2 - y_1, -(x_2 - x_1), 0)) * radius;
+
+    glm::vec3 perpendicular_b_xy;
+    // glm::normalize(glm::vec3(y_3 - y_2, -(x_3 - x_2), 0)) * radius;
+
+    perpendicular_a_xy = glm::vec3(1.f, 0.f, 0.f) * radius;
+    perpendicular_b_xy = glm::vec3(1.f, 0.f, 0.f) * radius;
+
+    // if (x_1 < 0 && x_2 < 0) {
+    //   perpendicular_a_xy = glm::vec3(-1.f, 0.f, 0.f) * radius;
+    //   perpendicular_b_xy = glm::vec3(-1.f, 0.f, 0.f) * radius;
+    // } else if (x_1 > 0 && x_2 > 0) {
+    //   perpendicular_a_xy = glm::vec3(1.f, 0.f, 0.f) * radius;
+    //   perpendicular_b_xy = glm::vec3(1.f, 0.f, 0.f) * radius;
+    // } else if (x_1 < 0 && x_2 == 0) {
+    //   perpendicular_a_xy = glm::vec3(1.f, 0.f, 0.f) * radius;
+    //   perpendicular_b_xy = glm::vec3(1.f, 0.f, 0.f) * radius;
+    // } else if (x_1 == 0 && x_2 > 0) {
+    //   perpendicular_a_xy = glm::vec3(1.f, 0.f, 0.f) * radius;
+    //   perpendicular_b_xy = glm::vec3(1.f, 0.f, 0.f) * radius;
+    // }
 
     // top cover
     if (i == 0) {
@@ -89,6 +105,7 @@ Cuboid::Cuboid()
         this->faces.push_back(bottom_faces[j]);
       };
     };
+
     // need to define my own vertices in each run
     glm::vec3 vertices[] = {
         // index 0
@@ -116,7 +133,7 @@ Cuboid::Cuboid()
         glm::vec3(point_b) - normal_z,
     };
 
-    // default colors userd by cube
+    // manually defined colors userd by cube
     glm::vec3 colors[] = {
         {0.0f, 0.0f, 0.8f},
         {0.0f, 0.0f, 0.8f},
@@ -139,7 +156,7 @@ Cuboid::Cuboid()
         {0.0f, 0.8f, 0.0f},
     };
 
-    float index_offset = i * 16.f + 4.f;
+    float index_offset = i * 16.f + interval_size;
 
     // 4 faces for the side cubes
     glm::uvec3 faces[] = {
@@ -163,11 +180,11 @@ Cuboid::Cuboid()
       this->faces.push_back(faces[j]);
     }
 
-    if (i == number_of_elements - 1) {
+    if (i == number_of_elements - 3) {
       glm::vec3 bottom_vertices[] = {
           glm::vec3(point_b) + perpendicular_b_xy,  // index 0
           glm::vec3(point_b) + normal_z,
-          glm::vec3(point_b) - perpendicular_b_xy,  // index 0
+          glm::vec3(point_b) - perpendicular_b_xy,
           glm::vec3(point_b) - normal_z,
       };
 
