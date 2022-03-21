@@ -9,6 +9,12 @@ namespace cgCourse {
 
 void Cuboid::draw() {
   glBindVertexArray(vaoID);
+  // blending
+  // glEnable(GL_BLEND);
+  // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  // aliasing
+  // glEnable(GL_LINE_SMOOTH);
+  // glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
   glDrawElements(GL_TRIANGLES, 3 * faces.size(), GL_UNSIGNED_INT, 0);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -26,28 +32,28 @@ Cuboid::Cuboid()
   float x_3, y_3;
 
   // variables that decide the shape and segmentation of the function
-  int number_of_elements = 15;
+  const float INTERVAL_SIZE = 4.0f;  // [-2,2] => 4
+  int number_of_elements = 40;
   float radius = 0.5f;
-  float shape_size = 4.0f;
 
   glm::vec3 normal_z = glm::vec3(0.f, 0.f, 1.f) * radius;
 
-  for (int i = 0; i < number_of_elements; ++i) {
-    // defining the coordinates
-    x_1 = shape_size / number_of_elements * i - shape_size / 2.f;
-    x_2 = shape_size / number_of_elements * (i + 1) - shape_size / 2.f;
-    x_3 = shape_size / number_of_elements * (i + 2) - shape_size / 2.f;
+  for (int i = 0; i < number_of_elements - 2; ++i) {
+    // defining the coordinates and adjust x coordinates for interval
+    x_1 = INTERVAL_SIZE / number_of_elements * i - INTERVAL_SIZE / 2.f;
+    x_2 = INTERVAL_SIZE / number_of_elements * (i + 1) - INTERVAL_SIZE / 2.f;
+    x_3 = INTERVAL_SIZE / number_of_elements * (i + 2) - INTERVAL_SIZE / 2.f;
     y_1 = func0(x_1);
     y_2 = func0(x_2);
     y_3 = func0(x_3);
 
     // textual debugging
     // std::cout << "i: " << i << "\n";
-    // std::cout << "x1: " << x_1 << "\n";
-    // std::cout << "x2: " << x_2 << "\n";
-    // std::cout << "x3: " << x_3 << "\n";
+    // std::cout << "x1: " << x_1 << " | ";
     // std::cout << "y1: " << y_1 << "\n";
+    // std::cout << "x2: " << x_2 << " | ";
     // std::cout << "y2: " << y_2 << "\n";
+    // std::cout << "x3: " << x_3 << " | ";
     // std::cout << "y3: " << y_3 << "\n";
 
     // vector definitions, in 2D
@@ -56,13 +62,17 @@ Cuboid::Cuboid()
 
     /* get perpendicular vectors with new length 1
      * (a, b, c) => (b, -a, c)
+     * but we cannot use only perpendicular vectors of a and b, since they hit a
+     * certain point, where either is 0, making it impossible to create a perpendicular
+     * vector.
+     * this is why we create a helper vector 'c' (b-a) and 'd' (c-b) and take their
+     * perpendicular vector, which is always something
      */
     glm::vec3 perpendicular_a_xy =
         glm::normalize(glm::vec3(y_2 - y_1, -(x_2 - x_1), 0)) * radius;
-        // glm::normalize(glm::vec3(y_1, -(x_1), 0)) * radius;
+
     glm::vec3 perpendicular_b_xy =
         glm::normalize(glm::vec3(y_3 - y_2, -(x_3 - x_2), 0)) * radius;
-        // glm::normalize(glm::vec3(y_2, -(x_2), 0)) * radius;
 
     // top cover
     if (i == 0) {
@@ -89,6 +99,7 @@ Cuboid::Cuboid()
         this->faces.push_back(bottom_faces[j]);
       };
     };
+
     // need to define my own vertices in each run
     glm::vec3 vertices[] = {
         // index 0
@@ -116,7 +127,7 @@ Cuboid::Cuboid()
         glm::vec3(point_b) - normal_z,
     };
 
-    // default colors userd by cube
+    // manually defined colors userd by cube
     glm::vec3 colors[] = {
         {0.0f, 0.0f, 0.8f},
         {0.0f, 0.0f, 0.8f},
@@ -139,7 +150,7 @@ Cuboid::Cuboid()
         {0.0f, 0.8f, 0.0f},
     };
 
-    float index_offset = i * 16.f + 4.f;
+    float index_offset = i * 16.f + INTERVAL_SIZE;
 
     // 4 faces for the side cubes
     glm::uvec3 faces[] = {
@@ -163,11 +174,11 @@ Cuboid::Cuboid()
       this->faces.push_back(faces[j]);
     }
 
-    if (i == number_of_elements - 1) {
+    if (i == number_of_elements - 3) {
       glm::vec3 bottom_vertices[] = {
           glm::vec3(point_b) + perpendicular_b_xy,  // index 0
           glm::vec3(point_b) + normal_z,
-          glm::vec3(point_b) - perpendicular_b_xy,  // index 0
+          glm::vec3(point_b) - perpendicular_b_xy,
           glm::vec3(point_b) - normal_z,
       };
 
