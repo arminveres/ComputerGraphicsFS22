@@ -2,9 +2,9 @@
 In this exercise there are several small tasks for you:
 
 - ~~Apply rotation, translation and scalings for a **shape** object~~
-- Let the **torus** and **cube** spin around one or multiple axis of your choice
-- Show the normals for the **torus** as a MultiLine Object
-- Show the **torus** with colors according to normals
+- ~~Let the **torus** and **cube** spin around one or multiple axis of your choice~~
+- ~~Show the normals for the **torus** as a MultiLine Object~~
+- ~~Show the **torus** with colors according to normals~~
 - Calculate the normal matrix, apply it to the normals of the **torus** and compare the color output
 - _(optional) apply the normal matrix of the torus also to manipulate the line object_
 

@@ -12,16 +12,28 @@ MultiLine::MultiLine(const std::vector<glm::vec3> &_vertices,
   /* TODO: Create the multiline object by creating line segments from the
    *       vertices and normals of the incoming object.
    */
+  float length = 0.3f;
 
+  for (int i = 0; i < _vertices.size(); i++) {
+    positions.push_back(_vertices[i]);
+    positions.push_back(_vertices[i] + length * _normals[i]);
+
+    colors.push_back({0.8f, 0.8f, 0});
+    colors.push_back({0.8f, 0.8f, 0});
+
+    lineIndices.push_back({2 * i, 2 * i + 1});
+  }
   // End TODO:
 }
 
 void MultiLine::draw() const {
   // bind the Vertex Array Object and draw the lines
   glBindVertexArray(vaoID);
-  /* TODO: make the draw call for all line indices. */
 
+  /* TODO: make the draw call for all line indices. */
+  glDrawElements(GL_LINES, 2 * lineIndices.size(), GL_UNSIGNED_INT, 0);
   // End TODO:
+
   glBindVertexArray(0);
 }
 

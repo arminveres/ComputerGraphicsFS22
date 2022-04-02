@@ -11,14 +11,22 @@ layout(location = 1) in vec3 vColor;
 layout(location = 2) in vec3 vNormal;
 
 out vec3 fragColor;
-
+/* out vec3 normal; */
 
 // matrices that stay constant for the whole mesh.
 uniform mat4 mvpMatrix;
+uniform mat4 normMatrix;
 
 void main()
 {
-	gl_Position =  mvpMatrix * vec4(vPosition, 1);
-	fragColor = vColor;
-}
+  gl_Position =  mvpMatrix * vec4(vPosition, 1.f);
+  // normal color
+  /* fragColor = vColor; */
 
+  // normal colors
+  fragColor = vNormal;
+
+  // normalMatrix applied
+  /* fragColor = vec4(vNormal, 1.f); */
+  /* fragColor = (normMatrix * vec4(vNormal, 1.f)); */
+}

@@ -56,7 +56,7 @@ bool GLExample::update() {
 
   // cube->setPosition({3.f, 2.f, 1.f});
   // cube->setRotation(45.f, {0.0, 0.0, 1.0});
-  // cube->setRotation(45.f, {0.0, 0.0, 1.0});
+  cube->setRotation(30.f, {0.0, 0.0, 1.0});
   // cube->setScaling({0.5, 0.5, 0.5});
   // cube->setScaling({2.0, 2.0, 2.0});
   // torus->setRotation(90.f, {1, 0.8, 0.4});
@@ -81,7 +81,7 @@ bool GLExample::render() {
   renderCube();
   renderTorus();
   // call update function to have real time change to the shapes
-  // update();
+  update();
   return true;
 }
 
@@ -97,9 +97,15 @@ void GLExample::renderCube() {
 void GLExample::renderTorus() {
   programForTorus->bind();
   mvpMatrix = viewProjectionMatrix * torus->getModelMatrix();
+
   /* TODO: add the normal matrix. */
 
+  glm::mat4 normalMatrix = glm::transpose(glm::inverse(mvpMatrix));
+  glUniformMatrix4fv(programForTorus->getUniformLocation("normMatrix"), 1,
+                     GL_FALSE, &normalMatrix[0][0]);
+
   // TODO End
+
   glUniformMatrix4fv(programForTorus->getUniformLocation("mvpMatrix"), 1,
                      GL_FALSE, &mvpMatrix[0][0]);
   torus->draw();
@@ -109,6 +115,14 @@ void GLExample::renderTorus() {
    *  TODO: render the line object with the normals of the torus. Use the
    *  shaderprogram in "programForTorusNormals" for this.
    */
+
+  programForTorusNormals->bind();
+  mvpMatrix = viewProjectionMatrix * normalsTorus->getModelMatrix();
+
+  glUniformMatrix4fv(programForTorusNormals->getUniformLocation("mvpMatrix"), 1,
+                     GL_FALSE, &mvpMatrix[0][0]);
+  normalsTorus->draw();
+  programForTorusNormals->unbind();
 
   // TODO End
 }
