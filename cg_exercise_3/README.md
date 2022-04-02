@@ -1,12 +1,12 @@
-Tasks:
+## Tasks:
 In this exercise there are several small tasks for you:
 
-- Apply rotation, translation and scalings for a shape object
-- Let the torus and cube spin around one or multiple axis of your choice
-- Show the normals for the torus as a MultiLine Object
-- Show the torus with colors according to normals
-- Calculate the normal matrix, apply it to the normals of the torus and compare the color output
-- (optional) apply the normal matrix of the torus also to manipulate the line object
+- ~~Apply rotation, translation and scalings for a **shape** object~~
+- Let the **torus** and **cube** spin around one or multiple axis of your choice
+- Show the normals for the **torus** as a MultiLine Object
+- Show the **torus** with colors according to normals
+- Calculate the normal matrix, apply it to the normals of the **torus** and compare the color output
+- _(optional) apply the normal matrix of the torus also to manipulate the line object_
 
 The example viewer is basically the same from exercise 2. However, due to some refactoring the source is easier to understand but it did not work out very well and somehow the object are now messed up. The first task for you is now to fix the scene by implementing the transformations for translation, rotation and scaling so that the objects are again in the right place. For this you have to change the Shape class to manipulate the modelmatrix of a certain shape and the GLExample class to apply the transformations:
 
@@ -23,12 +23,12 @@ The main goal is that you are able to show the difference between normals with o
 
 It is a good idea to read the learnopengl.com tutorials number 7 (Transformations) &  12 (Basic Lighting) to get familiar with the problem of transformations and the normal matrix.
 
-How to submit:
+## How to submit:
 Once your code compiles and works, take screenshots showing the above mentioned things and submit the .zip file with your source code (do not include the _build_ folder) to OLAT before the deadline.
 
 Important: this project also includes a CMake config file similar to the projects before. It should be straightforward to build the project in most of the systems using CMake. Read the assignment 1 file for instructions in case something is unclear.
 
-Learning targets:
+## Learning targets:
 - You know how to apply a transformation to a model matrix
 - You now how to draw lines based objects
 - You know how to apply a normal matrix to normals and you see the difference between right and wrong normals in your program
