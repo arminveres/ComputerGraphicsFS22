@@ -26,7 +26,6 @@ void main()
   // normal colors
   fragColor = vNormal;
 
-  // normalMatrix applied
-  /* fragColor = vec4(vNormal, 1.f); */
-  /* fragColor = (normMatrix * vec4(vNormal, 1.f)); */
+  // normal matrix applied
+  fragColor = (mat3(normMatrix) * vNormal);
 }

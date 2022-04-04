@@ -46,8 +46,8 @@ bool GLExample::init() {
 
 bool GLExample::update() {
   // let the thread sleep for consistent rendering
-  using namespace std::chrono_literals;
-  std::this_thread::sleep_for(100ms);
+  // using namespace std::chrono_literals;
+  // std::this_thread::sleep_for(100ms);
 
   /*
    *  TODO: update the cube and the torus with rotations, translations and
@@ -56,10 +56,11 @@ bool GLExample::update() {
 
   // cube->setPosition({3.f, 2.f, 1.f});
   // cube->setRotation(45.f, {0.0, 0.0, 1.0});
-  cube->setRotation(30.f, {0.0, 0.0, 1.0});
+  // cube->setRotation(30.f, {0.0, 0.0, 1.0});
+  cube->setRotation(.1f, {0.0, 0.0, 1.0});
   // cube->setScaling({0.5, 0.5, 0.5});
   // cube->setScaling({2.0, 2.0, 2.0});
-  // torus->setRotation(90.f, {1, 0.8, 0.4});
+  // torus->setRotation(.2f, {0.f, 1.f, 0.0});
   // torus->setScaling({0.5, 0.5, 0.5});
 
   // TODO End
@@ -78,10 +79,11 @@ bool GLExample::render() {
   // compute view and projection matrix for the camera (static for our case)
   viewProjectionMatrix = computeViewProjectionMatrix();
 
-  renderCube();
-  renderTorus();
   // call update function to have real time change to the shapes
   update();
+
+  renderCube();
+  renderTorus();
   return true;
 }
 
