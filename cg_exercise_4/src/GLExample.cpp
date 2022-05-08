@@ -55,9 +55,11 @@ bool GLExample::init() {
   normalsTorus->setPosition(glm::vec3(1.0, 0.0, 0.0));
 
   /* TODO: set light info here */
-  // light.ambientTerm ...
-  light.ambientTerm = glm::vec3(0.1, 0.1, 0.1);
-  light.diffuseTerm = glm::vec3(0.8, 0.8, 0.8);
+  // light.ambientTerm = glm::vec3(0.1, 0.1, 0.1);
+  light.ambientTerm = glm::vec3(0.20f, 0.70f, 0.01f);
+  // light.diffuseTerm = glm::vec3(0.8, 0.8, 0.8);
+  light.diffuseTerm = glm::vec3(0.20f, 0.70f, 0.01f);
+
   light.specularTerm = glm::vec3(0.8, 0.8, 0.8);
   // End
   return constructed;
@@ -117,6 +119,13 @@ void GLExample::addLightVariables(
 
   glUniform3f(_program->getUniformLocation("diffuseTerm"), light.diffuseTerm[0],
               light.diffuseTerm[1], light.diffuseTerm[2]);
+
+  glUniform3f(_program->getUniformLocation("specularTerm"),
+              light.specularTerm[0], light.specularTerm[1],
+              light.specularTerm[2]);
+
+  glUniform3f(_program->getUniformLocation("viewPos"), cam.getPosition()[0],
+              cam.getPosition()[1], cam.getPosition()[2]);
 }
 // END TODO
 

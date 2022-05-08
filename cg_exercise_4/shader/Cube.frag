@@ -16,9 +16,11 @@ out vec3 color;
  *      to your matric variables
  */
 uniform vec3 lightPos;
+uniform vec3 viewPos;
 uniform vec3 lightColor;
 uniform vec3 ambientTerm;
 uniform vec3 diffuseTerm;
+uniform vec3 specularTerm;
 
 void main()
 {
@@ -27,16 +29,23 @@ void main()
   color = objectColor;
   //color = normal;
 
-  /* TODO: add there code for phong lighting
+  /**
+   *TODO: add there code for phong lighting
    */
-  vec3 lightDir = normalize(lightPos - fragPos);
   vec3 norm = normalize(normal);
+  vec3 lightDir = normalize(lightPos - fragPos);
+  vec3 viewDir = normalize(viewPos - fragPos);
+  vec3 reflectDir = reflect(-lightDir, norm);
 
   vec3 ambient = ambientTerm * objectColor;
-  vec3 diffuse = max(dot(norm, lightDir), 0.0) * lightColor;
-  color = (ambient + diffuse) * objectColor;
+  vec3 diffuse = diffuseTerm * max(dot(norm, lightDir), 0.0) * objectColor;
 
+  int shininess = 32;
+  float spec = pow(max(dot(viewDir, reflectDir), 0.f), shininess);
+  vec3 specular = specularTerm * spec * objectColor;
+
+  color = (ambient + diffuse + specular) * objectColor;
   // End TODO
 
-  /* color = objectColor; */
+  /* color = specular; */
 }
