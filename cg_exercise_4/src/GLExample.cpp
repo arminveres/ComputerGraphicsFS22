@@ -114,6 +114,9 @@ void GLExample::addLightVariables(
 
   glUniform3f(_program->getUniformLocation("ambientTerm"), light.ambientTerm[0],
               light.ambientTerm[1], light.ambientTerm[2]);
+
+  glUniform3f(_program->getUniformLocation("diffuseTerm"), light.diffuseTerm[0],
+              light.diffuseTerm[1], light.diffuseTerm[2]);
 }
 // END TODO
 

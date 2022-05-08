@@ -7,6 +7,7 @@
 
 in vec3 objectColor;
 in vec3 normal;
+in vec3 fragPos;
 
 // Ouput data
 out vec3 color;
@@ -14,9 +15,10 @@ out vec3 color;
 /* TODO: fill these structs with values from outside the shader similar
  *      to your matric variables
  */
-
+uniform vec3 lightPos;
 uniform vec3 lightColor;
 uniform vec3 ambientTerm;
+uniform vec3 diffuseTerm;
 
 void main()
 {
@@ -28,9 +30,11 @@ void main()
   /* TODO: add there code for phong lighting
   *
   */
+  vec3 lightDir = normalize(lightPos - fragPos);
+  vec3 norm = normalize(normal);
 
   vec3 ambient = ambientTerm * objectColor;
-  color = ambient * objectColor;
-
-	// End TODO
+  vec3 diffuse = max(dot(norm, lightDir), 0.0) * lightColor;
+  color = (ambient + diffuse) * objectColor;
+  // End TODO
 }

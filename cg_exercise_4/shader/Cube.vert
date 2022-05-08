@@ -14,6 +14,7 @@ layout(location = 2) in vec3 vNormal;
 // Tip: Try to use the flat modifier to make color associations of a fragment visible for debugging. 
 out vec3 objectColor;
 out vec3 normal;
+out vec3 fragPos;
 
 // matrices that stay constant for the whole mesh.
 uniform mat4 modelMatrix;
@@ -25,24 +26,21 @@ uniform mat4 mvpMatrix;
 
 void main()
 {
-	normal = mat3(transpose(inverse(modelMatrix))) * vNormal;
-	// Output position of the vertex, in clip space : MVP * vPosition
-	gl_Position = mvpMatrix * vec4(vPosition, 1);
-	// The color of each vertex will be interpolated
-	// to produce the color of each fragment
-	// ... uncomment this for color
-	objectColor = vColor;
-	// ... uncomment this for color according to normals
-	//objectColor = vNormal;
+  normal = mat3(transpose(inverse(modelMatrix))) * vNormal;
+  // Output position of the vertex, in clip space : MVP * vPosition
+  gl_Position = mvpMatrix * vec4(vPosition, 1);
+  // The color of each vertex will be interpolated
+  // to produce the color of each fragment
+  // ... uncomment this for color
+  objectColor = vColor;
+  // ... uncomment this for color according to normals
+  //objectColor = vNormal;
 
-	/* TODO: add there code for gourand shading
-	*
-	*/
+  /* TODO: add there code for gourand shading
+  *
+  */
 
+  fragPos = vec3(modelMatrix * vec4(vPosition, 1.f));
 
-
-
-
-
- 	// End TODO
+  // End TODO
 }
