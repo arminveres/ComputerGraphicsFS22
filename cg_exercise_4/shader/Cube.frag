@@ -32,6 +32,7 @@ void main()
   /**
    *TODO: add there code for phong lighting
    */
+  /*
   vec3 norm = normalize(normal);
   vec3 lightDir = normalize(lightPos - fragPos);
   vec3 viewDir = normalize(viewPos - fragPos);
@@ -46,6 +47,5 @@ void main()
 
   color = (ambient + diffuse + specular) * objectColor;
   // End TODO
-
-  /* color = specular; */
+  */
 }

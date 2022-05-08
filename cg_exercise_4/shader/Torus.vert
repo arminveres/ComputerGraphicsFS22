@@ -23,6 +23,12 @@ uniform mat4 mvpMatrix;
 /* TODO: additional variables
  *
  */
+uniform vec3 lightPos;
+uniform vec3 viewPos;
+uniform vec3 lightColor;
+uniform vec3 ambientTerm;
+uniform vec3 diffuseTerm;
+uniform vec3 specularTerm;
 
 void main()
 {
@@ -40,6 +46,19 @@ void main()
   *
   */
 
+  vec3 norm = normalize(normal);
+  vec3 lightDir = normalize(lightPos - fragPos);
+  vec3 viewDir = normalize(viewPos - fragPos);
+  vec3 reflectDir = reflect(-lightDir, norm);
+
+  vec3 ambient = ambientTerm * objectColor;
+  vec3 diffuse = diffuseTerm * max(dot(norm, lightDir), 0.0) * objectColor;
+
+  int shininess = 5;
+  float spec = pow(max(dot(viewDir, reflectDir), 0.f), shininess);
+  vec3 specular = specularTerm * spec * objectColor;
+
+  objectColor = (ambient + diffuse + specular) * objectColor;
   fragPos = vec3(modelMatrix * vec4(vPosition, 1.f));
 
   // End TODO:

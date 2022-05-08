@@ -100,6 +100,8 @@ void Shape::initIndexBuffer() {
 
 std::vector<glm::vec3> &Shape::getPositions() { return positions; }
 
+glm::vec3 Shape::getPosition() { return objectPosition; }
+
 std::vector<glm::vec3> &Shape::getNormals() { return normals; }
 
 std::vector<glm::uvec3> &Shape::getFaces() { return faces; }

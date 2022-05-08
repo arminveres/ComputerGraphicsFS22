@@ -3,7 +3,7 @@ In this exercise we will take a closer look at lighting. The tasks are:
 
 - [x] Apply the **Phong** lighting model with ambient, diffuse and specular term to
       the cube objects and the torus. Use for this the **Phong Shading** model.
-- [ ] If you are done with phong illumination try to render your objects with
+- [x] If you are done with phong illumination try to render your objects with
       Gourand Shading.
 - [ ] (optional) Apply Blinn-Phong Illumination to your scene and make a screenshot
       in comparison to phong illuminations.
@@ -34,12 +34,23 @@ with an **ambient and diffuse light color according to the first 6 digits of you
 legi number (e.g. 11-789-5XX)**. You can use pairs of two digits to express one
 color channel but be aware that you might have to rescale the values.
 
-The final results for the tasks are shown in den doc folder (Light values are here white, all 1.0). Compare your results with the files in the _doc_ folder to see if your result is correct. Make screenshots of all your results during the phong lighting process (ambient only, diffuse & ambient illumination, specular and phong lighting) and upload them to OLAT. For the gourand shading it is only required to upload a screenshot showing the difference between gourand shading and phong shading (see lecture slides for the difference between phong lighting and phong shading vs. gourand shading).
+The final results for the tasks are shown in den doc folder (Light values are here
+white, all 1.0). Compare your results with the files in the _doc_ folder to see
+if your result is correct. Make screenshots of all your results during the phong
+lighting process (**ambient only, diffuse & ambient illumination, specular and phong
+lighting**) and upload them to OLAT. For the gourand shading it is only required to
+upload a screenshot showing the difference between gourand shading and phong shading
+(see lecture slides for the difference between phong lighting and phong shading vs.
+gourand shading).
 
 How to submit:
-Once your code compiles and works, take screenshots showing the above mentioned things and submit the .zip file with your source code (do not include the _build_ folder) to OLAT before the deadline.
+Once your code compiles and works, take screenshots showing the above mentioned
+things and submit the .zip file with your source code (do not include the _build_
+folder) to OLAT before the deadline.
 
-Important: this project also includes a CMake config file similar to the projects before. It should be straightforward to build the project in most of the systems using CMake. Read the assignment 1 file for instructions in case something is unclear.
+Important: this project also includes a CMake config file similar to the projects
+before. It should be straightforward to build the project in most of the systems
+using CMake. Read the assignment 1 file for instructions in case something is unclear.
 
 Learning targets:
 

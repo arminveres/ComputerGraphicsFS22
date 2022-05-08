@@ -32,13 +32,14 @@ void main()
   /**
    *TODO: add there code for phong lighting
    */
+  /*
   vec3 norm = normalize(normal);
   vec3 lightDir = normalize(lightPos - fragPos);
   vec3 viewDir = normalize(viewPos - fragPos);
   vec3 reflectDir = reflect(-lightDir, norm);
 
   vec3 ambient = ambientTerm * objectColor;
-  vec3 diffuse = max(dot(norm, lightDir), 0.0) * lightColor;
+  vec3 diffuse = max(dot(norm, lightDir), 0.0) * objectColor;
 
   int shininess = 32;
   float spec = pow(max(dot(viewDir, reflectDir), 0.f), shininess);
@@ -46,5 +47,5 @@ void main()
 
   color = (ambient + diffuse + specular) * objectColor;
   // End TODO
-  /* color = specular; */
+  */
 }

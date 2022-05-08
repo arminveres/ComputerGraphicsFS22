@@ -55,6 +55,7 @@ bool GLExample::init() {
   normalsTorus->setPosition(glm::vec3(1.0, 0.0, 0.0));
 
   /* TODO: set light info here */
+  // with colors set, it is harder to see AMBIENT + DIFFUSE screenshot!
   // light.ambientTerm = glm::vec3(0.1, 0.1, 0.1);
   light.ambientTerm = glm::vec3(0.20f, 0.70f, 0.01f);
   // light.diffuseTerm = glm::vec3(0.8, 0.8, 0.8);
@@ -101,6 +102,9 @@ bool GLExample::render() {
 
   renderCubes();
   renderTorus();
+
+  // update();
+
   return true;
 }
 
@@ -110,6 +114,11 @@ bool GLExample::render() {
  */
 void GLExample::addLightVariables(
     const std::shared_ptr<ShaderProgram> &_program) {
+
+  glUniform3f(_program->getUniformLocation("lightPos"),
+              lightbox->getPosition()[0],
+              lightbox->getPosition()[1],
+              lightbox->getPosition()[2]);
 
   glUniform3f(_program->getUniformLocation("lightColor"), lightboxColor[0],
               lightboxColor[1], lightboxColor[2]);
