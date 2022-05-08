@@ -1,6 +1,6 @@
 #version 410 core
 
-/* TODO update your vertex shader so that...
+/* TODO: update your vertex shader so that...
  *      ...it emits all necessary information to the fragment shader for phong illumination
  *      ...it emits the color in case you do gourand shading
  */
@@ -19,7 +19,7 @@ out vec3 normal;
 uniform mat4 modelMatrix;
 uniform mat4 mvpMatrix;
 
-/* TODO additional variables
+/* TODO: additional variables
  *
  */
 
@@ -35,7 +35,7 @@ void main()
 	// ... uncomment this for color according to normals
 	//objectColor = vNormal;
 
-	/* TODO add there code for gourand shading
+	/* TODO: add there code for gourand shading
 	*
 	*/
 
@@ -44,5 +44,5 @@ void main()
 
 
 
- 	// End TODO
+ 	// End TODO:
 }

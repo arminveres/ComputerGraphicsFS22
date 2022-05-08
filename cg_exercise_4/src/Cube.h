@@ -3,13 +3,11 @@
 
 #include "Shape.h"
 
-namespace cgCourse
-{
-	class Cube : public Shape
-	{
-	public:
-		Cube();
-	};
-}
+namespace cgCourse {
+class Cube : public Shape {
+public:
+  Cube();
+};
+} // namespace cgCourse
 
 #endif //  CUBE_H

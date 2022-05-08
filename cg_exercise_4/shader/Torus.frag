@@ -1,6 +1,6 @@
 #version 410 core
 
-/* TODO update your vertex shader so that...
+/* TODO: update your vertex shader so that...
  *      ...it emits the color for phong illumination
  *      ...it emits the color from the vertex shader in case you do gourand shading there
  */
@@ -11,31 +11,26 @@ in vec3 normal;
 // Ouput data
 out vec3 color;
 
-/* TODO fill these structs with values from outside the shader similar
+/* TODO: fill these structs with values from outside the shader similar
  *      to your matric variables
  */
 
+uniform vec3 lightColor;
+uniform vec3 ambientTerm;
 
 void main()
 {
-	// Output color = color specified in the vertex shader,
-	// interpolated between all 3 surrounding vertices
-	color = objectColor;
-	//color = normal;
+  // Output color = color specified in the vertex shader,
+  // interpolated between all 3 surrounding vertices
+  color = objectColor;
+  //color = normal;
 
-	/* TODO add there code for phong lighting
-	*
-	*/
-	
+  /* TODO: add there code for phong lighting
+  *
+  */
 
-
-
-
-
-
-
-
-
+  vec3 ambient = ambientTerm * objectColor;
+  color = ambient * objectColor;
 
 	// End TODO
 }
