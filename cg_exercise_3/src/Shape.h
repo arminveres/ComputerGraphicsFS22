@@ -49,7 +49,7 @@ protected:
   glm::mat4 modelMatrix = glm::mat4(1.f); // Identity matrix
 
   /* @brief Identity Matrix */
-  glm::mat4 identityMatrix;
+  glm::mat4 identityMatrix = glm::mat4(1.f);
   // TODO End
 
   GLuint vaoID = 0;
