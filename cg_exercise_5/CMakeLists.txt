@@ -7,18 +7,15 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_DIRNAME "CMake" CACHE INTERNAL "Generic name of the folder with CMake modules")
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/${CMAKE_DIRNAME})
-	
 
+set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}/../external")
 if(MSVC)
-	set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}/external")
-	set(BINARY_DIR "${CMAKE_SOURCE_DIR}/external")
+	set(BINARY_DIR "${CMAKE_SOURCE_DIR}/../external")
 	set(GLFW_ROOT "${EXTERNAL_DIR}/glfw")
 	
 	set(CMAKE_PREFIX_PATH "${EXTERNAL_DIR}/glew" "${EXTERNAL_DIR}/freeimage")
 	set(CMAKE_LIBRARY_PATH "${EXTERNAL_DIR}/glew/lib-win/msvc14/" "${EXTERNAL_DIR}/freeimage/lib-win/msvc14/")
 endif()
-
-set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}/external")
 
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)

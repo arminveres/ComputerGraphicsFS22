@@ -5,12 +5,13 @@ project(glexample)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}/../external")
+
 if(MSVC)
   set(CMAKE_DIRNAME "CMake" CACHE INTERNAL "Generic name of the folder with CMake modules")
   list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/${CMAKE_DIRNAME})
 
-  set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}/external")
-  set(BINARY_DIR "${CMAKE_SOURCE_DIR}/external")
+  set(BINARY_DIR "${CMAKE_SOURCE_DIR}/../external")
   set(GLFW_ROOT "${EXTERNAL_DIR}/glfw")
 
   set(CMAKE_PREFIX_PATH "${EXTERNAL_DIR}/glew")
@@ -20,7 +21,6 @@ endif()
 
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
-set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}/external")
 
 if(MSVC)
   find_package(GLFW REQUIRED)
