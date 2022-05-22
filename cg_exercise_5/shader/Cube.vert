@@ -22,9 +22,11 @@ out vec2 texCoord;
 uniform mat4 modelMatrix;
 uniform mat4 mvpMatrix;
 
-void main(){
-	/* TODO: set texture coordinates here */
+void main() {
 
+	// TODO: set texture coordinates here
+
+	texCoord = vTexCoords;
 
 	// End TODO
 	

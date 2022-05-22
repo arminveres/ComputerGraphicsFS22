@@ -65,7 +65,9 @@ namespace cgCourse
 		std::vector<glm::vec3> midPoints;
 		std::vector<float> midPointsLenght;
 
+		// @brief Main Circle
         Circle circleXZ(radiusX, segmentsInXZPlane);
+		// @brief Segment Circle
         Circle circleXY(radiusY, segmentsInXYPlane);
 
         // calculate positions
@@ -162,13 +164,19 @@ namespace cgCourse
 		//       the same texture either by setting the texture coordinates between 0.0 and 1.0
 		//       or by using one of the texture functions, e.g. with GL_REPEAT
 
-		//texCoords...
+		// texCoords.push_back()
 
-
-
-
-
-
+		for (int j = 0; j < circleXZ.getSegments(); j++)
+		{
+			for (int i = 0; i < circleXY.getVertices().size(); i++)
+			{
+				float x_pt = float(i) / circleXY.getVertices().size();
+				float y_pt = float(j) / circleXZ.getSegments();
+				// std::cout << "x coord:" << x_pt << "\n";
+				// std::cout << "y coord:"<< y_pt << "\n";
+				texCoords.push_back(glm::vec2(x_pt, y_pt));
+			}
+		}
 		// END TODO
 	}
 

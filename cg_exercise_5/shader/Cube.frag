@@ -1,10 +1,10 @@
 #version 330 core
 
-/* TODO update your vertex shader so that...
+/* TODO: update your vertex shader so that...
  *      ...it has texture samplers declared
  *      ...it outputs a diffuse texture as diffuse color 
  *      ...it uses a light map to modify the specular highlights
- */    
+ */
 
 
 in vec3 objectColor;
@@ -12,8 +12,10 @@ in vec3 normal;
 in vec3 worldPos;
 in vec2 texCoord;
 
-/* TODO declare texture samplers here */
+/* TODO: declare texture samplers here */
 
+uniform sampler2D texDiff;
+/* uniform sampler2D texSpec; */
 
 // END TODO
 
@@ -30,9 +32,10 @@ uniform struct Light {
 
 void main()
 {
-    /* TODO modify this piece of source code to make the texture lookup 
-       working with the input texture instead of the object color */
-    vec3 colorMap = objectColor;
+	/* TODO: modify this piece of source code to make the texture lookup 
+	   working with the input texture instead of the object color */
+	/* vec3 colorMap = objectColor; */
+	vec3 colorMap = texture(texDiff, texCoord).xyz;
 	
 
 	// END TODO
@@ -53,11 +56,12 @@ void main()
 	float specStrength = 1.0;
 	vec3 specularColor = specStrength * spec * light.specular;
 	
-	/* TODO modify this piece of source code if your are using a specular map. 
+	/* TODO: modify this piece of source code if your are using a specular map. 
 	 *      remember that you can also use the color output for debugging of the
 	 *      texture maps and texture coordinates in case that you face troubles.
 	 */
 	color = (ambientColor + diffuseColor + specularColor) * colorMap.rgb, 1.0;
+	/* color = vec3(texCoord, 1.f); */
 	// End TODO
 
 }
