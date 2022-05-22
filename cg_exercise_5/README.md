@@ -41,22 +41,43 @@ For the result image I used texture coordinates from 0.0 to 4.0 for the torus
 object and used the GL_MIRROR parameter for the texture but you can achieve the
 same results also with other coordinates/parameter combinations.
 
-Texturing is happening in the fragment shader but it will take some time to understand how the loading of a texture work so be prepared to check the opengl specification for the commands your are using. Also, if you haven't done so already I would advice you to read and follow the learnopengl.com Chapter 6 (Textures) and Chapter 14 (Light maps). The implementation of the example is similar but of course has to be adapted to your needs.
+Texturing is happening in the fragment shader but it will take some time to
+understand how the loading of a texture work so be prepared to check the opengl
+specification for the commands your are using. Also, if you haven't done so already
+I would advice you to read and follow the learnopengl.com Chapter 6 (Textures)
+and Chapter 14 (Light maps). The implementation of the example is similar but of
+course has to be adapted to your needs.
 
-The final results for the tasks are shown in den doc folder. Compare your results with the files in the _doc_ folder to see if your result is correct. Make screenshots of all your results during the texturing process (texture coordinates, texture only, texture and light map applied) and upload them to OLAT.
+The final results for the tasks are shown in the doc folder. Compare your results
+with the files in the _doc_ folder to see if your result is correct. Make screenshots
+of all your results during the texturing process
+
+- texture coordinates,
+- texture only,
+- texture and light map applied
+
+and upload them to OLAT.
 
 How to submit:
-Once your code compiles and works, take screenshots showing the above mentioned things and submit the .zip file with your source code (do not include the _build_ folder) to OLAT before the deadline.
+Once your code compiles and works, take screenshots showing the above mentioned
+things and submit the .zip file with your source code (do not include the _build_
+folder) to OLAT before the deadline.
 
 ## How to get it running
 
-This example has an additional libary named freeimage. Under OSX you can install this library with homebrew:
+This example has an additional libary named freeimage. Under OSX you can install
+this library with homebrew:
 
 `brew install freeimage`
 
-Under windows you should be able to use it out of the box because it is provided with the project. In case you have problems with this please don't hesitate to write me immediately.
+Under windows you should be able to use it out of the box because it is provided
+with the project. In case you have problems with this please don't hesitate to
+write me immediately.
 
-**Important:** this project also includes a CMake config file similar to the projects before. besides the freeimage library it should be straightforward to build the project in most of the systems using CMake. Read the assignment 1 file for instructions in case something is unclear.
+**Important:** this project also includes a CMake config file similar to the projects
+before. besides the freeimage library it should be straightforward to build the
+project in most of the systems using CMake. Read the assignment 1 file for
+instructions in case something is unclear.
 
 Learning targets:
 

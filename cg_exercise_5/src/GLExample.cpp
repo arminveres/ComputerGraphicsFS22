@@ -68,8 +68,20 @@ namespace cgCourse
 		 *      already in this class for this purpose.
 		 */
 		cubetex = std::make_shared<Texture>();
+		// cubetex->loadFromFile(std::string(RES_DIR) + "/wood.jpg");
+		// cubetex->loadFromFile(std::string(RES_DIR) + "/obi-wan.png");
 		cubetex->loadFromFile(std::string(RES_DIR) + "/container.png");
-		//...
+
+		cubetexSpec = std::make_shared<Texture>();
+		cubetexSpec->loadFromFile(std::string(RES_DIR) + "/container_specular.png");
+
+		torustex = std::make_shared<Texture>();
+		// torustex->loadFromFile(std::string(RES_DIR) + "/wood.jpg");
+		// torustex->loadFromFile(std::string(RES_DIR) + "/obi-wan.png");
+		torustex->loadFromFile(std::string(RES_DIR) + "/container.png");
+
+		torustexSpec = std::make_shared<Texture>();
+		torustexSpec->loadFromFile(std::string(RES_DIR) + "/container_specular.png");
 
 		// End TODO
 
@@ -116,6 +128,7 @@ namespace cgCourse
 
         renderCubes();
         renderTorus();
+		// update();
 		return true;
 	}
 
@@ -139,8 +152,17 @@ namespace cgCourse
 		 *       used with glActiveTexture.
 		 */
 
+		glActiveTexture(GL_TEXTURE0);
+		// cubetex->bind(); // no need to bind them, it happens in the loadFromFile()
+		GLint texDiff = programForCube->getUniformLocation("texDiff");
+		glUniform1i(texDiff, 0);
+		// glBindTexture(GL_TEXTURE_2D, texDiff);
 
-
+		glActiveTexture(GL_TEXTURE1);
+		// cubetexSpec->bind(); // no need to bind them, it happens in the loadFromFile()
+		GLint texSpec = programForCube->getUniformLocation("texSpec");
+		glUniform1i(texSpec, 1);
+		// glBindTexture(GL_TEXTURE_2D, texSpec);
 
 		// End TODO
 
@@ -153,7 +175,8 @@ namespace cgCourse
 		 *       to zero.
 		 */
 
-
+		cubetex->unbind();
+		cubetexSpec->unbind();
 
 		// End TODO
         programForCube->unbind();
@@ -162,11 +185,18 @@ namespace cgCourse
     void GLExample::renderTorus()
     {
         programForTorus->bind();
-		mvpMatrix = cam.getViewProjectionMatrix() * torus->getModelMatrix();
-		glUniformMatrix4fv(programForTorus->getUniformLocation("modelMatrix"), 1, GL_FALSE, &torus->getModelMatrix()[0][0]);
-		glUniformMatrix4fv(programForTorus->getUniformLocation("mvpMatrix"), 1, GL_FALSE, &mvpMatrix[0][0]);
-        torus->draw();
 
+		// TODO: set bindings
+
+		glActiveTexture(GL_TEXTURE0);
+		// torustex->bind(); // no need to bind them, it happens in the loadFromFile()
+		GLint texDiff = programForTorus->getUniformLocation("texDiff");
+		glUniform1i(texDiff, 0);
+
+		glActiveTexture(GL_TEXTURE1);
+		// torustexSpec->bind(); // no need to bind them, it happens in the loadFromFile()
+		GLint texSpec = programForTorus->getUniformLocation("texSpec");
+		glUniform1i(texSpec, 1);
 
 		// End TODO
 
@@ -174,13 +204,15 @@ namespace cgCourse
 		glUniformMatrix4fv(programForTorus->getUniformLocation("modelMatrix"), 1, GL_FALSE, &torus->getModelMatrix()[0][0]);
 		glUniformMatrix4fv(programForTorus->getUniformLocation("mvpMatrix"), 1, GL_FALSE, &mvpMatrix[0][0]);
         torus->draw();
+
         programForTorus->unbind();
 
 		/* TODO: unbind textures by setting all glBindTextures for all active texture layers
 		*       to zero.
 		*/
 
-
+		torustex->unbind();
+		torustexSpec->unbind();
 
 		// End TODO
 

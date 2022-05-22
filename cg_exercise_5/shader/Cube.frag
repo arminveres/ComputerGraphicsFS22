@@ -15,7 +15,7 @@ in vec2 texCoord;
 /* TODO: declare texture samplers here */
 
 uniform sampler2D texDiff;
-/* uniform sampler2D texSpec; */
+uniform sampler2D texSpec;
 
 // END TODO
 
@@ -35,18 +35,20 @@ void main()
 	/* TODO: modify this piece of source code to make the texture lookup 
 	   working with the input texture instead of the object color */
 	/* vec3 colorMap = objectColor; */
-	vec3 colorMap = texture(texDiff, texCoord).xyz;
-	
+	vec3 colorMap = vec3(texture(texDiff, texCoord));
 
 	// END TODO
 
 	// ambient term
 	float ambientFactor = 0.25f;
 	vec3 ambientColor = (light.ambient.xyz * ambientFactor);
+	/* ambientColor = light.ambient * vec3(texture(texDiff, texCoord)); */
+
 	// diffuse term
 	vec3 lightDir = vec3(normalize(light.position - worldPos));
 	float diffDot = max(dot(normal, lightDir), 0.0);
 	vec3 diffuseColor = diffDot * light.diffuse;
+	/* diffuseColor = light.diffuse * diffDot * vec3(texture(texDiff, texCoord)); */
 
 	// specular term (phong version)
 	vec3 viewDir = vec3(normalize(camPos - worldPos));
@@ -55,13 +57,16 @@ void main()
 	float spec = pow(specDot, 32);
 	float specStrength = 1.0;
 	vec3 specularColor = specStrength * spec * light.specular;
+	/* specularColor = light.specular * spec * texture(texSpec, texCoord).rgb; */
 	
 	/* TODO: modify this piece of source code if your are using a specular map. 
 	 *      remember that you can also use the color output for debugging of the
 	 *      texture maps and texture coordinates in case that you face troubles.
 	 */
+
 	color = (ambientColor + diffuseColor + specularColor) * colorMap.rgb, 1.0;
 	/* color = vec3(texCoord, 1.f); */
-	// End TODO
 
+	// End TODO
 }
+
