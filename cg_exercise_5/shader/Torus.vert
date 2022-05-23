@@ -22,7 +22,8 @@ out vec2 texCoord;
 uniform mat4 modelMatrix;
 uniform mat4 mvpMatrix;
 
-void main(){
+void main() {
+
 	/* TODO: set texture coordinates for fragment shader here here */
 	
 	texCoord = vTexCoords;

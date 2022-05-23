@@ -67,19 +67,25 @@ namespace cgCourse
 		 *      texture for the cube. Don't forget to initialize the shared pointers existing
 		 *      already in this class for this purpose.
 		 */
+
+		glActiveTexture(GL_TEXTURE0);
 		cubetex = std::make_shared<Texture>();
+		cubetex->loadFromFile(std::string(RES_DIR) + "/container.png");
 		// cubetex->loadFromFile(std::string(RES_DIR) + "/wood.jpg");
 		// cubetex->loadFromFile(std::string(RES_DIR) + "/obi-wan.png");
-		cubetex->loadFromFile(std::string(RES_DIR) + "/container.png");
 
+		glActiveTexture(GL_TEXTURE1);
 		cubetexSpec = std::make_shared<Texture>();
 		cubetexSpec->loadFromFile(std::string(RES_DIR) + "/container_specular.png");
 
+		glActiveTexture(GL_TEXTURE2);
 		torustex = std::make_shared<Texture>();
+		// torustex->loadFromFile(std::string(RES_DIR) + "/container.png");
+		torustex->loadFromFile(std::string(RES_DIR) + "/golddiag.jpg");
 		// torustex->loadFromFile(std::string(RES_DIR) + "/wood.jpg");
 		// torustex->loadFromFile(std::string(RES_DIR) + "/obi-wan.png");
-		torustex->loadFromFile(std::string(RES_DIR) + "/container.png");
 
+		glActiveTexture(GL_TEXTURE3);
 		torustexSpec = std::make_shared<Texture>();
 		torustexSpec->loadFromFile(std::string(RES_DIR) + "/container_specular.png");
 
@@ -153,16 +159,14 @@ namespace cgCourse
 		 */
 
 		glActiveTexture(GL_TEXTURE0);
-		// cubetex->bind(); // no need to bind them, it happens in the loadFromFile()
+		cubetex->bind(); // no need to bind them, it happens in the loadFromFile()
 		GLint texDiff = programForCube->getUniformLocation("texDiff");
 		glUniform1i(texDiff, 0);
-		// glBindTexture(GL_TEXTURE_2D, texDiff);
 
 		glActiveTexture(GL_TEXTURE1);
-		// cubetexSpec->bind(); // no need to bind them, it happens in the loadFromFile()
+		cubetexSpec->bind(); // no need to bind them, it happens in the loadFromFile()
 		GLint texSpec = programForCube->getUniformLocation("texSpec");
 		glUniform1i(texSpec, 1);
-		// glBindTexture(GL_TEXTURE_2D, texSpec);
 
 		// End TODO
 
@@ -189,12 +193,12 @@ namespace cgCourse
 		// TODO: set bindings
 
 		glActiveTexture(GL_TEXTURE0);
-		// torustex->bind(); // no need to bind them, it happens in the loadFromFile()
+		torustex->bind(); // no need to bind them, it happens in the loadFromFile()
 		GLint texDiff = programForTorus->getUniformLocation("texDiff");
 		glUniform1i(texDiff, 0);
 
 		glActiveTexture(GL_TEXTURE1);
-		// torustexSpec->bind(); // no need to bind them, it happens in the loadFromFile()
+		torustexSpec->bind(); // no need to bind them, it happens in the loadFromFile()
 		GLint texSpec = programForTorus->getUniformLocation("texSpec");
 		glUniform1i(texSpec, 1);
 

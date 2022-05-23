@@ -35,7 +35,10 @@ void main()
 	/* TODO: modify this piece of source code to make the texture lookup 
 	   working with the input texture instead of the object color */
 	/* vec3 colorMap = objectColor; */
+	/* vec3 colorMap = texture(texDiff, texCoord).xyz; */
 	vec3 colorMap = vec3(texture(texDiff, texCoord));
+	/* vec3 specMap = texture(texSpec, texCoord).xyz; */
+	vec3 specMap = vec3(texture(texSpec, texCoord));
 
 	// END TODO
 
@@ -56,7 +59,8 @@ void main()
 	float specDot = max(dot(viewDir, reflectDir), 0.0);
 	float spec = pow(specDot, 32);
 	float specStrength = 1.0;
-	vec3 specularColor = specStrength * spec * light.specular;
+	/* vec3 specularColor = specStrength * spec * light.specular; */
+	vec3 specularColor = specStrength * spec * light.specular * specMap;
 	/* specularColor = light.specular * spec * texture(texSpec, texCoord).rgb; */
 	
 	/* TODO: modify this piece of source code if your are using a specular map. 
@@ -65,6 +69,7 @@ void main()
 	 */
 
 	color = (ambientColor + diffuseColor + specularColor) * colorMap.rgb, 1.0;
+	/* color = (ambientColor + diffuseColor) * colorMap + specularColor, 1.0; */
 	/* color = vec3(texCoord, 1.f); */
 
 	// End TODO

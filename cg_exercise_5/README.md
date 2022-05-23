@@ -3,8 +3,8 @@
 In this exercise we will take a closer look at mapping. The tasks are:
 
 - [x] Apply texture mapping to our cube and torus objects.
-- [ ] Apply a light map to the cube and the torus object.
-- [ ] Combine the texture mapping with the previously implemented Blinn-Phong
+- [x] Apply a light map to the cube and the torus object.
+- [x] Combine the texture mapping with the previously implemented Blinn-Phong
       illumination model.
 - [ ] (optional) apply gamma correction in the fragment shaders to enhance your
       results (learnopengl Chapter 33 "Gamma Correction").
