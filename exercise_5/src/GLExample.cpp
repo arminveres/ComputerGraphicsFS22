@@ -81,13 +81,15 @@ namespace cgCourse
 		glActiveTexture(GL_TEXTURE2);
 		torustex = std::make_shared<Texture>();
 		// torustex->loadFromFile(std::string(RES_DIR) + "/container.png");
-		torustex->loadFromFile(std::string(RES_DIR) + "/golddiag.jpg");
+		// torustex->loadFromFile(std::string(RES_DIR) + "/golddiag.jpg");
 		// torustex->loadFromFile(std::string(RES_DIR) + "/wood.jpg");
 		// torustex->loadFromFile(std::string(RES_DIR) + "/obi-wan.png");
+		torustex->loadFromFile(std::string(RES_DIR) + "/brickwall.jpg");
 
 		glActiveTexture(GL_TEXTURE3);
 		torustexSpec = std::make_shared<Texture>();
-		torustexSpec->loadFromFile(std::string(RES_DIR) + "/container_specular.png");
+		// torustexSpec->loadFromFile(std::string(RES_DIR) + "/container_specular.png");
+		torustexSpec->loadFromFile(std::string(RES_DIR) + "/brickwall_specular.jpg");
 
 		// End TODO
 
