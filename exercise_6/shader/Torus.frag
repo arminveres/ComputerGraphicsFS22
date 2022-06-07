@@ -6,19 +6,18 @@
  *      ...it uses the normal texture as normal information for lighting
  */
 
-
 in vec3 objectColor;
 in vec3 vertexNormal;
 in vec3 worldPos;
 in vec2 texCoord;
+in vec3 tangent;
+in mat3 TBN;
 
 uniform sampler2D torustex;
 uniform sampler2D torustexSpec;
 
 /* TODO declare normal texture samplers here */
-
-
-
+uniform sampler2D torusNormaltex;
 // END TODO
 
 uniform vec3 camPos;
@@ -41,10 +40,12 @@ void main()
 
     /* TODO modify the source code to use the normal texture as
      * normal information for the phong lighting.
-	 *
+    *
      */
-    vec3 normal = vertexNormal;
-
+        vec3 normal = vertexNormal;
+	vec3 normalMap = texture(torusNormaltex, texCoord.xy).rgb;
+	normal = normalMap * 2.0 - 1.0;
+        normal = normalize(TBN * normal);
 
 
 

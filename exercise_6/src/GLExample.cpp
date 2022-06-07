@@ -61,10 +61,12 @@ namespace cgCourse
 		 *       - torusNormaltex - the normal texture for the torus
 		 *       It is also possible to use the brickwall for the cube, may be it is easier to debug.
 		 */
+		cubeNormaltex = std::make_shared<Texture>();
+		cubeNormaltex->loadFromFile(std::string(RES_DIR) + "/container_normal.jpg");
 
-
-
-        // END TODO
+		torusNormaltex = std::make_shared<Texture>();
+		torusNormaltex->loadFromFile(std::string(RES_DIR) + "/brickwall_normal.jpg");
+		// END TODO
 
 
 		cubetex = std::make_shared<Texture>();
@@ -152,7 +154,6 @@ namespace cgCourse
 		glUniform1i(programForCube->getUniformLocation("cubetex"), 0);
 		glUniform1i(programForCube->getUniformLocation("cubetexSpec"), 1);
 
-
 		/* TODO: bind the normal map textures for shaders with glBindTexture and glActiveTexture.
 		 *       check the OpenGL documentation to understand these commands.
 		 *       Also, remember that you will have to set the uniform variables in
@@ -161,7 +162,9 @@ namespace cgCourse
 		 *       used with glActiveTexture.
 		 */
 
-
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, cubeNormaltex->getTexHandle());
+		glUniform1i(programForCube->getUniformLocation("cubeNormaltex"), 2);
 
 		// END TODO
 
@@ -181,6 +184,8 @@ namespace cgCourse
 		 *       to zero.
 		 */
 
+		// glActiveTexture(GL_TEXTURE2);
+		// glBindTexture(GL_TEXTURE_2D, 0);
 
 		// END TODO
 
@@ -205,9 +210,11 @@ namespace cgCourse
 		 *       analogue to the function above.
 		 */
 
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, this->torusNormaltex->getTexHandle());
+		glUniform1i(programForTorus->getUniformLocation("torusNormaltex"), 2);
 
-
-        // END TODO
+		// END TODO
 
 
 		mvpMatrix = cam.getViewProjectionMatrix() * torus->getModelMatrix();
@@ -222,10 +229,12 @@ namespace cgCourse
 		glBindTexture(GL_TEXTURE_2D, 0);
 
 
-        /* TODO: unbind textures by setting all glBindTextures for all active texture layers
-         *       to zero.
-         */
+		/* TODO: unbind textures by setting all glBindTextures for all active texture layers
+		*       to zero.
+		*/
 
+		// glActiveTexture(GL_TEXTURE2);
+		// glBindTexture(GL_TEXTURE_2D, 0);
 
 
 		// END TODO
@@ -233,6 +242,7 @@ namespace cgCourse
 
 		programForTorus->unbind();
 
+		drawTorusNormals = false;
 		if(drawTorusNormals)
 		{
 			programForTorusNormals->bind();

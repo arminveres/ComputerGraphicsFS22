@@ -166,10 +166,17 @@ namespace cgCourse
 		// have to look like for the torus by drawing it to a paper sheet.
 		// There are multiple ways of generating the tangents. Be aware that the normals are interpolated over
 		// all adjacent faces so the tangents at these points will not necessarily follow one of the surface edges.
-
-
 		// tangents...
 
+		constexpr float PI = 3.14159265359;
+		for (int j = 0; j < circleXZ.getSegments(); j++) {
+			for (int i = 0; i < circleXY.getVertices().size(); i++) {
+				float k = float(j) / circleXZ.getSegments() * 2.f * PI;
+				glm::vec3 tangent = glm::vec3(cos(k), 0, -sin(k));
+				//std::cout << tangent.x << tangent.y << tangent.z << std::endl;
+				tangents.push_back(tangent);
+			}
+		}
 
 		// END TODO
 	}
