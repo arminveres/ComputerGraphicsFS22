@@ -1,3 +1,5 @@
+**NOTE: No guarantees, partial and unowned solutions possible**
+
 # Computer Graphics FS22
 
 1. [Test Setup](./cg_exercise_1/)
